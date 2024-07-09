@@ -533,15 +533,16 @@ func (api *Client) completeUploadExternal(ctx context.Context, fileID string, pa
 	if params.threadTimestamp != "" {
 		values.Add("thread_ts", params.threadTimestamp)
 	}
-	response := &completeUploadExternalResponse{}
-	err = api.postMethod(ctx, "files.completeUploadExternal", values, response)
+	var response interface{}
+	err = api.postMethod(ctx, "files.completeUploadExternal", values, &response)
 	if err != nil {
 		return nil, err
 	}
-	if response.Err() != nil {
-		return nil, response.Err()
-	}
-	return response, nil
+	// if response.Err() != nil {
+	// 	return nil, response.Err()
+	// }
+	// return response, nil
+	return nil, nil
 }
 
 // UploadFileV2 uploads file to a given slack channel using 3 steps -
